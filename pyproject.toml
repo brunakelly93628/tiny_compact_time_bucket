@@ -1,6 +1,6 @@
 [project]
 name = "tiny-compact-time-bucket"
-version = "0.1.1"
+version = "0.1.2"
 description = "Assigns timestamps to variable-length buckets defined by user-supplied boundaries."
 requires-python = ">=3.10"
 dependencies = []
