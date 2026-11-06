@@ -33,3 +33,10 @@ The trade-off: you must compute and pass the bucket boundaries yourself. The lib
 - Buckets are left-closed, right-open: a timestamp equal to a boundary belongs to the bucket starting at that boundary. The last bucket's end is exclusive, so a timestamp equal to the last end is out of range.
 - Buckets must be contiguous with no gaps and no overlaps. `[(0, 10), (10, 20)]` is valid; `[(0, 10), (15, 20)]` raises `BucketError`.
 - `bool` is rejected for both bounds and timestamps, even though `bool` is a subclass of `int` in Python, to prevent `True`/`False` silently becoming `1`/`0`.
+
+## Design notes
+
+The window stores values eagerly rather than keeping running aggregates. Running
+sums drift with floating point over long streams, and recomputing from a small
+buffer is cheap enough that the drift is not worth the speed.
+
